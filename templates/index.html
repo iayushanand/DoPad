@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ slug }} - DoPad</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    
+    <div class="header">
+        <span>{{ slug }}</span>
+        <span id="status">Saved</span>
+    </div>
+
+    <textarea id="editor">{{ content }}</textarea>
+
+<script>
+const editor = document.getElementById("editor");
+const status = document.getElementById("status");
+
+let timeout;
+
+editor.addEventListener("input", () => {
+    status.textContent = "Saving..."
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(async () => {
+        
+        await fetch("/save/{{ slug }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: editor.value
+            })
+        });
+
+        status.textContent = "Saved";
+    }, 500);
+});
+</script>
+
+
+</body>
+</html>

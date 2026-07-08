@@ -20,7 +20,7 @@ A simple, lightweight web-based notepad built with Flask and SQLite. DoPad allow
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/DoPad.git
+   git clone https://github.com/iayushanand/DoPad.git
    cd DoPad
    ```
 
